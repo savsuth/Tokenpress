@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="assets/mascot.png" alt="ptk" width="200"/>
-</p>
+
 
 <p align="center">
   <strong>ptk — Python Token Killer</strong><br/>
@@ -23,7 +21,7 @@
 
 ## Your LLM calls carry dead weight
 
-A typical API response you feed into an agent:
+The typical API response into an agent:
 
 ```json
 {
