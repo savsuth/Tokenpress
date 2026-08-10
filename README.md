@@ -251,6 +251,3 @@ uv sync          # installs all dev dependencies, creates .venv automatically
 make check       # lint + typecheck + 361 tests
 ```
 
-## License
-
-MIT
