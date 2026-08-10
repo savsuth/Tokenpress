@@ -1,0 +1,39 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Monday at 06:00 UTC (catches new vulnerability patterns)
+    - cron: "0 6 * * 1"
+
+permissions: read-all
+
+jobs:
+  analyze:
+    name: Analyze Python
+    runs-on: ubuntu-latest
+    # CodeQL code scanning is free for public repos only.
+    # continue-on-error keeps CI green while the repo is private;
+    # remove this line after going public.
+    continue-on-error: true
+    permissions:
+      security-events: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4.37.4
+        with:
+          languages: python
+          # Use extended queries for deeper analysis
+          queries: +security-extended
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4.37.4
+        with:
+          category: "/language:python"

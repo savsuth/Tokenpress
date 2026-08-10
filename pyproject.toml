@@ -1,0 +1,100 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-token-killer"
+dynamic = ["version"]
+description = "Minimize LLM tokens from Python objects — dicts, code, logs, diffs, and more."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "amahi2001", email = "amahi2001@gmail.com" }]
+keywords = [
+    "llm", "tokens", "compression", "context-window",
+    "agents", "langchain", "langgraph", "claude", "openai",
+    "rag", "nlp",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing",
+    "Typing :: Typed",
+]
+
+# User-facing install extras (shipped to end-users)
+[project.optional-dependencies]
+tiktoken = ["tiktoken>=0.7"]
+
+[project.urls]
+Homepage = "https://github.com/amahi2001/python-token-killer"
+Repository = "https://github.com/amahi2001/python-token-killer"
+Issues = "https://github.com/amahi2001/python-token-killer/issues"
+Changelog = "https://github.com/amahi2001/python-token-killer/blob/main/CHANGELOG.md"
+
+# ── uv dev dependency groups (PEP 735) ──────────────────────────────────────
+# Separate groups let CI install only what each job needs.
+# `dev` is included by default on `uv sync`; others are opt-in.
+[dependency-groups]
+test = ["pytest>=8"]
+lint = ["ruff>=0.15"]
+typecheck = ["mypy>=1.20"]
+bench = ["tiktoken>=0.7"]
+hooks = ["pre-commit>=4"]
+# meta-group: everything a contributor needs
+dev = [
+    { include-group = "test" },
+    { include-group = "lint" },
+    { include-group = "typecheck" },
+    { include-group = "bench" },
+    { include-group = "hooks" },
+]
+
+[tool.uv]
+# Include dev group by default on `uv sync` so `uv sync` == ready to work
+default-groups = ["dev"]
+
+# ── build ────────────────────────────────────────────────────────────────────
+[tool.hatch.version]
+path = "src/ptk/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ptk"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/",
+    "tests/",
+    "benchmarks/",
+    "examples/",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "pyproject.toml",
+]
+
+# ── tooling ──────────────────────────────────────────────────────────────────
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+strict = true
+warn_return_any = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

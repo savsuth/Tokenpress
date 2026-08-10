@@ -1,0 +1,26 @@
+version: 2
+updates:
+  # uv: updates pyproject.toml + uv.lock (version and security updates)
+  # Requires package-ecosystem: "uv" — the native uv ecosystem added Dec 2025.
+  # Does NOT use "pip" — that misses uv.lock and [dependency-groups].
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    rebase-strategy: "auto"
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 5
+
+  # GitHub Actions versions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    rebase-strategy: "auto"
+    labels: ["ci"]
+    commit-message:
+      prefix: "ci"
