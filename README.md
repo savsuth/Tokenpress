@@ -15,7 +15,7 @@
 
 ---
 
-## LLM calls carry unnecessary weight
+## LLMs calls have unnecessary weight
 
 Consider a typical API response passed into an agent:
 
