@@ -1,8 +1,7 @@
 
 
 <p align="center">
-  <strong>ptk — Python Token Killer</strong><br/>
-  <strong>One call. Any Python object. Fewer tokens.</strong><br/>
+  <strong>ptk — Python Token Reducer</strong><br/>
   Zero dependencies · Auto type detection · 361 tests
 </p>
 
