@@ -1,5 +1,3 @@
-
-
 <p align="center">
   <strong>ptk — Python Token Reducer</strong><br/>
   Zero dependencies · Auto type detection · 361 tests
@@ -17,9 +15,9 @@
 
 ---
 
-## Your LLM calls carry dead weight
+## LLM calls carry unnecessary weight
 
-The typical API response into an agent:
+Consider a typical API response passed into an agent:
 
 ```json
 {
@@ -48,7 +46,7 @@ The typical API response into an agent:
 }
 ```
 
-Seven null fields, two empty containers. Your LLM reads them, bills you for them, learns nothing from them. `ptk` strips the noise:
+Seven null fields and two empty containers add no value: the LLM reads them, you pay for them, and it learns nothing from them. `ptk` removes this noise:
 
 ```python
 import ptk
@@ -59,7 +57,7 @@ ptk(response)
 {"user":{"id":8821,"name":"Alice Chen","email":"alice@example.com","preferences":{"theme":"dark"},"created_at":"2024-01-15T10:30:00Z","updated_at":"2024-06-20T14:22:00Z","is_verified":true,"is_active":true}}
 ```
 
-52% fewer tokens. Same information. No config needed.
+A 52% reduction in tokens, with no loss of information and no configuration required.
 
 ```bash
 pip install python-token-killer
@@ -71,7 +69,7 @@ uv add python-token-killer
 
 ## Benchmarks
 
-Token counts via tiktoken (`cl100k_base`, the tokenizer behind GPT-4 and Claude):
+Token counts measured via tiktoken (`cl100k_base`, the tokenizer used by GPT-4 and Claude):
 
 ```
 Input                          Tokens (before)   Tokens (after)   Saved
@@ -85,15 +83,15 @@ Verbose prose (text)                     101               74      27%
 Total                                 11,182            2,627      76%
 ```
 
-At Claude Sonnet 4.6 pricing ($3/1M input tokens), a 76% reduction on 100k tokens/day saves ~$6/month per user. Multiply that by your user base and your agent loop iterations.
+At Claude Sonnet 4.6 pricing ($3 per 1M input tokens), a 76% reduction on 100k tokens per day saves approximately $6 per month per user. This scales directly with your user base and the number of iterations in your agent loop.
 
-Run it yourself: `python benchmarks/bench.py`
+Run the benchmark yourself: `python benchmarks/bench.py`
 
 ---
 
 ## How it works
 
-You pass `ptk` any Python object. It detects the content type and picks the right compression strategy:
+`ptk` accepts any Python object, detects its content type, and applies the appropriate compression strategy:
 
 | Input           | Strategy                                                                                                   | Savings |
 | --------------- | ---------------------------------------------------------------------------------------------------------- | ------- |
@@ -146,9 +144,9 @@ ptk.minimize({"status": "pending", "error": None}, strip_nulls=False)
 
 ## Real-world examples
 
-### RAG pipeline: compress retrieved docs before they hit the prompt
+### RAG pipeline: compress retrieved documents before they reach the prompt
 
-Your retriever returns full documents. The LLM needs the content, not the metadata scaffolding around it.
+Retrievers often return full documents, but the LLM needs the content rather than the metadata surrounding it.
 
 ```python
 import ptk
@@ -162,13 +160,13 @@ def build_context(docs: list[dict]) -> str:
     return "\n\n---\n\n".join(chunks)
 ```
 
-Full working demo with token counts: [`examples/rag_pipeline.py`](examples/rag_pipeline.py)
+A complete working demo with token counts is available at [`examples/rag_pipeline.py`](examples/rag_pipeline.py).
 
 ---
 
 ### LangGraph / LangChain: compress tool outputs between nodes
 
-Drop this node between a tool call and the next LLM call. Tool outputs shrink before they re-enter the context window.
+Place this node between a tool call and the next LLM call so that tool outputs are reduced before re-entering the context window.
 
 ```python
 import ptk
@@ -181,13 +179,13 @@ def compress_tool_output(state: dict) -> dict:
     return state
 ```
 
-Complete agent loop with per-step token savings: [`examples/langgraph_agent.py`](examples/langgraph_agent.py)
+A complete agent loop with per-step token savings is available at [`examples/langgraph_agent.py`](examples/langgraph_agent.py).
 
 ---
 
-### Log triage: feed only failures to your LLM
+### Log triage: surface only failures to your LLM
 
-A 10,000-line CI log collapses to the failures and their stack traces.
+A 10,000-line CI log can be reduced to just the failures and their stack traces.
 
 ```python
 import ptk
@@ -196,7 +194,7 @@ errors = ptk.minimize(ci_log, content_type="log", aggressive=True)
 # 80%+ fewer tokens, same diagnostic signal.
 ```
 
-Before/after demo: [`examples/log_triage.py`](examples/log_triage.py)
+A before-and-after demo is available at [`examples/log_triage.py`](examples/log_triage.py).
 
 ---
 
@@ -204,7 +202,7 @@ Before/after demo: [`examples/log_triage.py`](examples/log_triage.py)
 
 ### `ptk.minimize(obj, *, aggressive=False, content_type=None, **kw) → str`
 
-- **`aggressive=True`** maximizes compression: timestamps stripped, signatures-only for code, errors-only for logs
+- **`aggressive=True`** maximizes compression: timestamps are stripped, code is reduced to signatures, and logs are reduced to errors only
 - **`content_type`** overrides auto-detection: `"dict"`, `"list"`, `"code"`, `"log"`, `"diff"`, `"text"`
 - **`format`** controls dict output: `"json"` (default), `"kv"`, `"tabular"`
 - **`mode`** controls code output: `"clean"` (default) or `"signatures"`
@@ -212,11 +210,11 @@ Before/after demo: [`examples/log_triage.py`](examples/log_triage.py)
 
 ### `ptk.stats(obj, **kw) → dict`
 
-Same interface as `minimize`. Returns `output`, `original_tokens`, `minimized_tokens`, `savings_pct`, `content_type`.
+Shares the same interface as `minimize`. Returns `output`, `original_tokens`, `minimized_tokens`, `savings_pct`, and `content_type`.
 
 ### `ptk(obj)` callable shorthand
 
-The module itself is callable. `ptk(x)` equals `ptk.minimize(x)`.
+The module itself is callable: `ptk(x)` is equivalent to `ptk.minimize(x)`.
 
 ---
 
@@ -224,20 +222,20 @@ The module itself is callable. `ptk(x)` equals `ptk.minimize(x)`.
 
 | Tool                                                              | Type           | Tradeoff                                          |
 | ----------------------------------------------------------------- | -------------- | ------------------------------------------------- |
-| **ptk**                                                           | Python library | One call, any Python object, zero deps            |
+| **ptk**                                                           | Python library | One call, any Python object, zero dependencies    |
 | [RTK](https://github.com/rtk-ai/rtk)                              | Rust CLI       | Compresses shell command output for coding agents |
 | [claw-compactor](https://github.com/open-compress/claw-compactor) | Python library | 14-stage AST-aware pipeline, heavier setup        |
 | [LLMLingua](https://github.com/microsoft/LLMLingua)               | Python library | Neural compression, requires GPU                  |
 
 ---
 
-## Design
+## Design principles
 
-- **Zero required dependencies.** Stdlib only. `tiktoken` is optional for exact token counts.
-- **Never raises.** Any Python object produces a string. Circular refs, `bytes`, `nan`, generators all handled.
-- **Never mutates.** Your input stays untouched.
+- **Zero required dependencies.** Standard library only; `tiktoken` is optional and used solely for exact token counts.
+- **Never raises.** Any Python object produces a string. Circular references, `bytes`, `nan`, and generators are all handled gracefully.
+- **Never mutates.** The input remains untouched.
 - **Thread-safe.** Stateless singleton minimizers.
-- **Fast.** Precompiled regexes, `frozenset` lookups, single-pass algorithms. Microseconds per call.
+- **Fast.** Precompiled regular expressions, `frozenset` lookups, and single-pass algorithms result in microsecond-level execution per call.
 
 ---
 
@@ -249,4 +247,3 @@ cd python-token-killer
 uv sync          # installs all dev dependencies, creates .venv automatically
 make check       # lint + typecheck + 361 tests
 ```
-
