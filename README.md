@@ -10,7 +10,6 @@
     <td align="left" valign="middle">
       <a href="https://github.com/amahi2001/python-token-killer/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/amahi2001/python-token-killer/ci.yml?branch=main&style=flat-square&label=CI" alt="CI"/></a><br/>
       <img src="https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.10+"/><br/>
-      <img src="https://img.shields.io/badge/mypy-strict-blue?style=flat-square" alt="mypy strict"/><br/>
       <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square" alt="License"/></a>
     </td>
   </tr>
