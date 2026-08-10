@@ -244,6 +244,6 @@ The module itself is callable: `ptk(x)` is equivalent to `ptk.minimize(x)`.
 ```bash
 git clone https://github.com/amahi2001/python-token-killer.git
 cd python-token-killer
-uv sync          # installs all dev dependencies, creates .venv automatically
-make check       # lint + typecheck + 361 tests
+uv sync          # installs all dev dependencies
+make check       
 ```
