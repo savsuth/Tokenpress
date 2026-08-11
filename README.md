@@ -59,6 +59,7 @@ ptk(response)
 A 52% reduction in tokens, with no loss of information and no configuration required.
 
 ```bash
+#published on PyPI as python-token-killer
 pip install python-token-killer
 # or
 uv add python-token-killer
