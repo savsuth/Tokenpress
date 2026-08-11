@@ -1,5 +1,5 @@
 <p align="center">
-  <strong>ptk — Python Token Reducer</strong><br/>
+  <strong>ptk  Tokenpress</strong><br/>
   Zero dependencies · Auto type detection · 361 tests
 </p>
 
