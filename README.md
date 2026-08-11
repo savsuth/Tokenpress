@@ -1,6 +1,6 @@
 <p align="center">
   <strong>  Tokenpress</strong><br/>
-  Zero dependencies · Auto type detection · 361 tests
+  Zero dependencies · 361 tests
 </p>
 
 <table align="center">
