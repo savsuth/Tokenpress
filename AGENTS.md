@@ -36,7 +36,7 @@ ptk.minimize(obj) → _types.detect(obj) → _ROUTER[type].run(obj) → MinResul
 ```bash
 uv sync                  # install all dev deps (run once after clone)
 make check               # lint + typecheck + tests — run before every commit
-make test                # tests only (361 tests, <0.7s)
+make test                # tests only (369 tests, <1.5s)
 make lint                # ruff check + format check
 make typecheck           # mypy --strict
 make bench               # benchmarks with tiktoken

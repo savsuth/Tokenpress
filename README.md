@@ -1,6 +1,6 @@
 <p align="center">
   <strong>  Tokenpress</strong><br/>
-  Zero dependencies · 361 tests
+  Zero dependencies · 369 tests
 </p>
 
 <table align="center">
@@ -69,21 +69,23 @@ uv add python-token-killer
 
 ## Benchmarks
 
-Token counts measured via tiktoken (`cl100k_base`, the tokenizer used by GPT-4 and Claude):
+Token counts measured via tiktoken (`cl100k_base`, OpenAI's GPT-4 tokenizer; other models tokenize differently, so treat the percentages as close estimates for them), aggressive mode:
 
 ```
 Input                          Tokens (before)   Tokens (after)   Saved
 ─────────────────────────────────────────────────────────────────────────
-API response (JSON)                    1,450              792      45%
-Python module (code → sigs)            2,734              309      89%
+API response (JSON)                    1,450              782      46%
+Python module (code → sigs)            2,714              309      89%
 CI log (58 lines, errors only)         1,389              231      83%
 50 user records (tabular)              2,774              922      67%
 Verbose prose (text)                     101               74      27%
 ─────────────────────────────────────────────────────────────────────────
-Total                                 11,182            2,627      76%
+Total                                  8,428            2,318      72%
 ```
 
-At Claude Sonnet 4.6 pricing ($3 per 1M input tokens), a 76% reduction on 100k tokens per day saves approximately $6 per month per user. This scales directly with your user base and the number of iterations in your agent loop.
+Default mode, which only applies lossless cleanup, saves 37% on the same inputs.
+
+At Claude Sonnet 4.6 pricing ($3 per 1M input tokens), a 72% reduction on 100k tokens per day saves approximately $6.50 per month per user. This scales directly with your user base and the number of iterations in your agent loop.
 
 Run the benchmark yourself: `python benchmarks/bench.py`
 
@@ -245,5 +247,5 @@ The module itself is callable: `ptk(x)` is equivalent to `ptk.minimize(x)`.
 git clone https://github.com/savsuth/Tokenpress.git
 cd python-token-killer
 uv sync          # installs all dev dependencies
-make check       
+make check
 ```

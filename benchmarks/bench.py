@@ -131,10 +131,18 @@ def main() -> None:
             f"{r['default_us']:>6}μs"
         )
 
-    # summary
-    total_orig = sum(r["original_tokens"] for r in results)
-    total_default = sum(r["default_tokens"] for r in results)
-    total_aggro = sum(r["aggressive_tokens"] for r in results)
+    # summary: count each input once. The "sigs" row re-runs the Python module in
+    # signatures mode, so its best result replaces the "code" row instead of adding to it.
+    by_input: dict[str, dict] = {}
+    for r in results:
+        key = r["name"].split(" (")[0]
+        best = by_input.get(key)
+        if best is None or r["aggressive_tokens"] < best["aggressive_tokens"]:
+            by_input[key] = r
+    totals = list(by_input.values())
+    total_orig = sum(r["original_tokens"] for r in totals)
+    total_default = sum(r["default_tokens"] for r in totals)
+    total_aggro = sum(r["aggressive_tokens"] for r in totals)
     print("-" * 92)
     print(
         f"{'TOTAL':<30} "
@@ -144,7 +152,8 @@ def main() -> None:
         f"{total_aggro:>8} "
         f"{(1 - total_aggro / total_orig) * 100:>6.1f}%"
     )
-    print("\nAll benchmarks use tiktoken cl100k_base (GPT-4/Claude tokenizer).")
+    print(f"\nTOTAL counts each of the {len(totals)} inputs once.")
+    print("All benchmarks use tiktoken cl100k_base (OpenAI's GPT-4 tokenizer).")
 
 
 if __name__ == "__main__":

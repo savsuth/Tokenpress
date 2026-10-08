@@ -27,18 +27,18 @@ features:
 
 ## How much does it save?
 
-Token counts via tiktoken (`cl100k_base`):
+Token counts via tiktoken (`cl100k_base`), aggressive mode:
 
 | Input | Before | After | Saved |
 |---|---|---|---|
-| API response (JSON) | 1,450 | 792 | 45% |
-| Python module (signatures only) | 2,734 | 309 | 89% |
+| API response (JSON) | 1,450 | 782 | 46% |
+| Python module (signatures only) | 2,714 | 309 | 89% |
 | CI log (errors only) | 1,389 | 231 | 83% |
 | 50 user records (tabular) | 2,774 | 922 | 67% |
 | Verbose prose | 101 | 74 | 27% |
-| **Total** | **11,182** | **2,627** | **76%** |
+| **Total** | **8,428** | **2,318** | **72%** |
 
-At Claude Sonnet pricing ($3/1M input tokens), 76% savings on 100k tokens/day saves ~$6/month per user.
+Default mode (lossless cleanup only) saves 37% on the same inputs. At Claude Sonnet pricing ($3/1M input tokens), 72% savings on 100k tokens/day saves ~$6.50/month per user.
 
 ## Install
 

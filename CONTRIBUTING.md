@@ -23,7 +23,7 @@ That's it. `uv sync` reads `uv.lock`, creates `.venv`, and installs every dev to
 | Command | What it does |
 |---|---|
 | `make check` | Lint + typecheck + tests (the one command before every PR) |
-| `make test` | Tests only (361 tests, ~0.6s) |
+| `make test` | Tests only (369 tests, ~1.5s) |
 | `make lint` | `ruff check` + `ruff format --check` |
 | `make typecheck` | `mypy --strict` |
 | `make bench` | Benchmarks with tiktoken |
