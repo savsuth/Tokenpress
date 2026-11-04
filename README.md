@@ -13,8 +13,7 @@
 </table>
 
 <p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/savsuth/Tokenpress@4cdf0d9/assets/tokenpress-demo.mp4"><img src="assets/tokenpress-demo-poster.jpg" alt="Still from the Tokenpress demo video: a printed receipt charging tokens for each line of an API response" width="720"/></a><br/>
-  <a href="https://cdn.jsdelivr.net/gh/savsuth/Tokenpress@4cdf0d9/assets/tokenpress-demo.mp4">Watch the 20-second demo</a>
+  <img src="assets/tokenpress-hero.svg" alt="A printer on a blue background bills an API response line by line, with its empty fields highlighted. Beside it: The LLM reads them, you pay for them, and it learns nothing from them." width="900"/>
 </p>
 
 ---
