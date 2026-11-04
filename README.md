@@ -49,7 +49,7 @@ Consider a typical API response passed into an agent:
 }
 ```
 
-Seven null fields and two empty containers add no value: the LLM reads them, you pay for them, and it learns nothing from them. `ptk` removes this noise:
+Eight null fields and two empty containers add no value: the LLM reads them, you pay for them, and it learns nothing from them. `ptk` removes this noise:
 
 ```python
 import ptk
@@ -60,7 +60,7 @@ ptk(response)
 {"user":{"id":8821,"name":"Alice Chen","email":"alice@example.com","preferences":{"theme":"dark"},"created_at":"2024-01-15T10:30:00Z","updated_at":"2024-06-20T14:22:00Z","is_verified":true,"is_active":true}}
 ```
 
-A 52% reduction in tokens, with no loss of information and no configuration required.
+A 57% reduction in tokens, with no loss of information and no configuration required.
 
 ```bash
 #published on PyPI as python-token-killer
