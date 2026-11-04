@@ -13,7 +13,7 @@
 </table>
 
 <p align="center">
-  <img src="assets/tokenpress-hero.svg" alt="A printer on a blue background bills an API response line by line, with its empty fields highlighted. Beside it: Your API response is full of nothing. Tokenpress removes it." width="900"/>
+  <img src="assets/tokenpress-hero.svg" alt="A printer on a blue background bills an API response line by line, with its empty fields highlighted. Beside it: Your API response is full of nothing." width="900"/>
 </p>
 
 ---
