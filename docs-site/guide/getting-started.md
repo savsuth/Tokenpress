@@ -42,7 +42,7 @@ print(result)
 # → '{"user":{"id":8821,"name":"Alice Chen","email":"alice@example.com","preferences":{"theme":"dark"},"is_verified":true}}'
 ```
 
-52% fewer tokens. The seven null fields and two empty containers are gone.
+69% fewer tokens. The six null fields and one empty list are gone.
 
 ## The three entry points
 

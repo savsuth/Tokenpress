@@ -63,4 +63,4 @@ ptk(response)
 # → '{"user":{"id":8821,"name":"Alice Chen"}}'
 ```
 
-Seven null fields gone. Same information. No config.
+Three null fields and one empty list gone. Same information. No config.
