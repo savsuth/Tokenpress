@@ -12,6 +12,11 @@
   </tr>
 </table>
 
+<p align="center">
+  <a href="assets/tokenpress-demo.mp4"><img src="assets/tokenpress-demo-poster.jpg" alt="Still from the Tokenpress demo video: a printed receipt charging tokens for each line of an API response" width="720"/></a><br/>
+  <a href="assets/tokenpress-demo.mp4">Watch the 20-second demo</a>
+</p>
+
 ---
 
 ## LLMs calls have unnecessary weight
