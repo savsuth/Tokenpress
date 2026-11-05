@@ -24,3 +24,8 @@ updates:
     labels: ["ci"]
     commit-message:
       prefix: "ci"
+    groups:
+      # CodeQL fails unless init and analyze run the same version.
+      codeql-action:
+        patterns:
+          - "github/codeql-action*"
